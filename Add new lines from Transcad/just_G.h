@@ -2994,9 +2994,7 @@ namespace gtfs
                                             wrap(route.route_long_name),
                                             wrap(route.route_desc),
                                             wrap(route.route_type),
-                                            route.route_color,
-                                            "" /* continuous_pickup */,
-                                            "" /* continuous_drop_off */ };
+                                            route.route_color};
             // TODO: handle new route fields.
             write_joined(out, std::move(fields));
         }
@@ -3169,8 +3167,6 @@ namespace gtfs
                                             wrap(stop_time.stop_sequence),
                                             wrap(stop_time.pickup_type),
                                             wrap(stop_time.drop_off_type),
-                                            "" /* continuous_pickup */,
-                                            "" /* continuous_drop_off */,
                                             wrap((int)stop_time.shape_dist_traveled) };
             // TODO: handle new stop_times fields.
             write_joined(out, std::move(fields));
