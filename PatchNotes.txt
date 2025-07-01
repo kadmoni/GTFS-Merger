@@ -1,0 +1,6 @@
+GTFS MERGE
+V1:
+	* This program is meant for merging GTFS files downloaded from Israel's Transportation Admin: https://gtfs.mot.gov.il/gtfsfiles/,
+	  and GTFS files Extracted from Transcad.
+V1.1:
+	* Added option for updating speeds of Current GTFS files.

@@ -1,0 +1,5 @@
+1. currently there is an extra trip over what is needed (probably becuase the first one is duplicated somehow)
+2. option for different times per route
+3. .exe pathing, maybe use direct lib command
+4. check user prompts, there are some irrelevent or badly written
+5. upload to server and check that it runs well off of it
