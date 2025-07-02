@@ -35,9 +35,9 @@ void Transcad::addInfoStops(gtfs::Stops& stops)
 {
 	for (gtfs::Stop& stop : stops)
 	{
-		stop.stop_code = stop.stop_name;
+		stop.stop_code = stop.stop_id;
 		stop.stop_desc = stop.stop_name;
-		stop.zone_id = stop.stop_code;
+		stop.zone_id = stop.stop_id;
 	}
 }
 

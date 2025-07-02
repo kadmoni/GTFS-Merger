@@ -332,6 +332,9 @@ void writeISR(gtfs::Feed& currentFeed, string path)
 
 int main()
 {
+
+	//forgot to use remove under, problems in all place in transcad.cpp where trip_id is used + problem with not adding shape ID to trips,
+	//might be related. try changing some of the keys/values to strings, dont forget to add remove under when checking for unique nums
 	unordered_map<long long int,long long int> changedRouteIds;
 	unordered_map<long long int,long long int> changedShapeIds;
 	unordered_map<long long int,long long int>changedTripIds;
