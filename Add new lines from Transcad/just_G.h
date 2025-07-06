@@ -159,7 +159,9 @@ namespace gtfs
                 prev_is_skipped = false;
                 continue;
             }
-
+            else
+                continue;
+            
             if (prev_is_quote)
             {
                 if (prev_is_skipped)
@@ -464,11 +466,12 @@ namespace gtfs
 
             if (record[i] == csv_separator)
             {
+                /*original tries ot maintain '"' i delete it becuase Hebrew is annoying
                 if (is_inside_quotes)
                 {
                     token += record[i];
                     continue;
-                }
+                }*/
 
                 fields.emplace_back(normalize(token, quotes_in_token));
                 token.clear();
@@ -3071,7 +3074,7 @@ namespace gtfs
             }
             std::vector<std::string> fields{
                 wrap(trip.route_id),      wrap(trip.service_id),      wrap(trip.trip_id),
-                wrap(trip.trip_headsign), wrap(trip.direction_id),
+                wrap(trip.trip_headsign)/*wrap*/, wrap(trip.direction_id),
                 wrap(trip.shape_id),        wrap(trip.wheelchair_accessible) };
             write_joined(out, std::move(fields));
         }

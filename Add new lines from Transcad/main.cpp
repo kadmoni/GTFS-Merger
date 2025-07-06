@@ -7,6 +7,8 @@
 #include <direct.h>
 #include <string>
 
+
+#define UNIQUE_LOC_STRING "-1"
 #define UNIQUE_LOC -1
 
 using namespace std;
@@ -176,15 +178,6 @@ void addStopTimesToFeed(gtfs::StopTimes& stoptimes, gtfs::Feed& currentFeed)
 		currentFeed.add_stop_time(stoptime);
 }
 
-std::string removeChar(std::string str, char charToRemove) {
-	str.erase(std::remove(str.begin(), str.end(), charToRemove), str.end());
-	return str;
-}
-
-long long int removeUnder(string str)
-{
-		return stoll(removeChar(str, '_'));
-}
 void speedAndFreqInput(int& speed, int& freq, unordered_map<long long int, int>& routeSpeeds, unordered_map<long long int, int>& routeFreq,gtfs::Routes& tempRoutes,int& update)
 {
 	int decSpeed = 0, decFreq = 0, decStartT = 0, decEndT = 0, input = 0;
@@ -305,7 +298,7 @@ bool startEndTInput(gtfs::Routes& routes,unordered_map<long long int,gtfs::Time>
 	}
 	
 }
-void addToFeedISR(gtfs::Routes& routes, gtfs::Stops& stops, gtfs::Trips& trips, gtfs::StopTimes& stoptimes,gtfs::Shapes& shapes, gtfs::Feed& currentFeed)
+void addToFeedISR(gtfs::Routes& routes, gtfs::Stops& stops, gtfs::Trips& trips, gtfs::StopTimes& stoptimes, gtfs::Shapes& shapes, gtfs::Feed& currentFeed)
 {
 	addRoutesToFeed(routes, currentFeed);
 	addStopsToFeed(stops, currentFeed);
@@ -333,25 +326,26 @@ void writeISR(gtfs::Feed& currentFeed, string path)
 int main()
 {
 
-	//forgot to use remove under, problems in all place in transcad.cpp where trip_id is used + problem with not adding shape ID to trips,
-	//might be related. try changing some of the keys/values to strings, dont forget to add remove under when checking for unique nums
+// one trip too many, change tomorrow
 	unordered_map<long long int,long long int> changedRouteIds;
 	unordered_map<long long int,long long int> changedShapeIds;
-	unordered_map<long long int,long long int>changedTripIds;
+	unordered_map<string,long long int>changedTripIds;
 	unordered_map<long long int,long long int>changedStopIds;
-	unordered_map<long long int, string>tripIdsUnder;
 	unordered_map<long long int,int> routeSpeeds;
 	unordered_map<long long int, int>routeFreq;
 	unordered_map < long long int, gtfs::Time > durations;
 	unordered_map<long long int, pair<gtfs::Time, gtfs::Time>> routeStartEndT;
 	unordered_map<long long int, string>stopIdToHeadsign;
 	vector <long long int> routeIds;
-	vector <long long int> tripIds;
+	vector <string> tripIds;
 	vector <long long int> shapeIds;
 	vector <long long int> stopIds;
 	bool startEndT;
 	int speed = -1, freq = -1,tripAmount =0,update = 0,startH,startM,endH,endM;
 	gtfs::Time startT, endT;
+
+	_chdir("C://Users//User//Desktop//DEV//GTFS-merger");
+
 	userPrints(ZipExtract);
 	system("Utillities\\zipExtractor.bat");
 	userPrints(CurrentParse);
@@ -366,7 +360,7 @@ int main()
 		routeIds.push_back(stoll(route.route_id));
 	for (const gtfs::Trip& trip : currentFeed.get_trips())
 	{
-		tripIds.push_back(removeUnder(trip.trip_id));
+		tripIds.push_back(trip.trip_id);
 		try
 		{
 			shapeIds.push_back(stoll(trip.shape_id));
@@ -401,7 +395,7 @@ int main()
 	gtfs::Stops tempStops(newFeed.get_stops());
 	Transcad::checkStopsDup(tempStops, stopIds, changedStopIds,stopIdToHeadsign);
 	startEndT = startEndTInput(tempRoutes,durations,routeStartEndT,startT, endT);	
-	Transcad::addTrips(tempTrips, startT, endT,durations,routeFreq,freq, changedTripIds[UNIQUE_LOC],startEndT);
+	Transcad::addTrips(tempTrips, startT, endT,durations,routeFreq,freq, changedTripIds[UNIQUE_LOC_STRING],startEndT);
 	userPrints(ParseShapes);
 	currentFeed.read_shapes();
 	gtfs::Shapes tempShapes(newFeed.get_shapes());
@@ -421,7 +415,7 @@ int main()
 	Transcad::addInfoRoutes(tempRoutes);
 	Transcad::addInfoStops(tempStops);
 	userPrints(AddToFeed);
-	addToFeedISR(tempRoutes, tempStops, tempTrips, tempStopTimes,tempShapes, currentFeed);
+	addToFeedISR(tempRoutes, tempStops, tempTrips, tempStopTimes , tempShapes, currentFeed);
 	userPrints(WriteSucc);
 	writeISR(currentFeed, "./Combined/");
 	userPrints(Copier);

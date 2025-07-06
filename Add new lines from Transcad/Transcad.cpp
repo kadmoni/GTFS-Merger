@@ -2,7 +2,18 @@
 #include "just_G.h"
 #include <string>
 #include <iostream>
+#define UNIQUE_LOC_STRING "-1"
 #define UNIQUE_LOC -1
+
+std::string removeChar(std::string str, char charToRemove) {
+	str.erase(std::remove(str.begin(), str.end(), charToRemove), str.end());
+	return str;
+}
+
+long long int removeUnder(string str)
+{
+	return stoll(removeChar(str, '_'));
+}
 
 long long int maxLong(long long int num, long long int unique)
 {
@@ -98,15 +109,15 @@ void Transcad::checkStopsDup(gtfs::Stops& stops, vector <long long int>& Ids, un
 	}
 }
 
-void Transcad::checkTripsDup(gtfs::Trips& trips, vector<long long int>& shapeIds, vector<long long int>& tripIds, unordered_map<long long int,long long int>& changedShapeIds, unordered_map<long long int,long long int>& changedTripIds)
+void Transcad::checkTripsDup(gtfs::Trips& trips, vector<long long int>& shapeIds, vector<std::string>& tripIds, unordered_map<long long int,long long int>& changedShapeIds, unordered_map<std::string,long long int>& changedTripIds)
 {
 	unordered_map<long long int, int> shapeFreqMap;
-	unordered_map<long long int, int> tripFreqMap;
+	unordered_map<std::string, int> tripFreqMap;
 	unordered_map<long long int, long long int>routeShapeId;
 	long long int tempShapeUnique = 1, tempTripUnique = 1;
-	for (long long int tripId : tripIds)
+	for (std::string tripId : tripIds)
 	{
-		tempTripUnique = maxLong(tripId, tempTripUnique);
+		tempTripUnique = maxLong(removeUnder(tripId), tempTripUnique);
 		tripFreqMap[tripId]++;
 	}
 	for (long long int shapeId : shapeIds)
@@ -116,8 +127,8 @@ void Transcad::checkTripsDup(gtfs::Trips& trips, vector<long long int>& shapeIds
 	}
 	for (gtfs::Trip& trip : trips)
 	{
-		tempTripUnique = maxLong(stoll(trip.trip_id), tempTripUnique);
-		tripFreqMap[stoll(trip.trip_id)]++;
+		tempTripUnique = maxLong(removeUnder(trip.trip_id), tempTripUnique);
+		tripFreqMap[trip.trip_id]++;
 		routeShapeId[stoll(trip.route_id)] = stoll(trip.shape_id);
 	}
 	for (gtfs::Trip& trip : trips)
@@ -137,15 +148,15 @@ void Transcad::checkTripsDup(gtfs::Trips& trips, vector<long long int>& shapeIds
 		{
 			trip.shape_id = to_string(routeShapeId[stoll(trip.route_id)]);
 		}
-		if (tripFreqMap[stoll(trip.trip_id)] > 1)
+		if (tripFreqMap[trip.trip_id] > 1)
 		{
-			changedTripIds[stoll(trip.trip_id)] =tempTripUnique;
+			changedTripIds[trip.trip_id] =tempTripUnique;
 			trip.trip_id = to_string(tempTripUnique);
 			cout << "Trip towards:" << trip.trip_headsign << " corresponding to route Id" << trip.route_id << "Has a duplicate trip Id.Id changed to : " << trip.trip_id << endl;
 			tempTripUnique = maxLong(tempTripUnique, tempTripUnique);
 		}
 	}
-	changedTripIds[UNIQUE_LOC] = tempTripUnique;
+	changedTripIds[UNIQUE_LOC_STRING] = tempTripUnique;
 	changedShapeIds[UNIQUE_LOC] = tempShapeUnique;
 }
 
@@ -227,14 +238,14 @@ void Transcad::addTrips(gtfs::Trips& trips, gtfs::Time& startT, gtfs::Time& endT
 	}
 
 }
-void Transcad::updateStopTimeIds(gtfs::StopTimes& stoptimes, unordered_map<long long int, long long int>changedTripIds, unordered_map<long long int, long long int>changedStopIds)
+void Transcad::updateStopTimeIds(gtfs::StopTimes& stoptimes, unordered_map<std::string, long long int>changedTripIds, unordered_map<long long int, long long int>changedStopIds)
 {
 	for (gtfs::StopTime& stoptime : stoptimes)
 	{
 		string tempTrip = stoptime.trip_id;
 		try
 		{
-			stoptime.trip_id = to_string(changedTripIds.at(stoll(stoptime.trip_id)));
+			stoptime.trip_id = changedTripIds.at(stoptime.trip_id);
 		}
 		catch (const std::out_of_range& oor)
 		{
@@ -477,13 +488,13 @@ void Transcad::matchShapeId(gtfs::Shapes& shapes, unordered_map<long long int, l
 {
 	for (gtfs::ShapePoint& shape : shapes)
 	{
-
+		std::string tempId = shape.shape_id;
 		try {
 			shape.shape_id = to_string(changedShapeIds.at(stoll(shape.shape_id)));
 		}
 		catch (const std::out_of_range& oor)
 		{
-			continue;
+			shape.shape_id = tempId;
 		}
 	}
 }
