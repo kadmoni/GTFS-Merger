@@ -197,6 +197,7 @@ void Transcad::addTrips(gtfs::Trips& trips, gtfs::Time& startT, gtfs::Time& endT
 			tuple time = duration.get_hh_mm_ss();
 			int tripAmount = ((int)(get<0>(time)) + (((double)(get<1>(time))) / 60)) * freq;
 			for (gtfs::Trip& trip : trips)
+			for (gtfs::Trip& trip : trips)
 			{
 				for (int i = 0; i < tripAmount; i++)
 				{
@@ -269,16 +270,16 @@ void Transcad::addStopTimesDepartures(gtfs::Trips& trips, unordered_map <long lo
 {
 	if (startEndT == true)//same start and end times for all lines
 	{
-		unordered_map<long long int, long long int>tripToRouteIds;
-		unordered_map<long long int, gtfs::Time>tripToStartTime;
-		unordered_map<long long int, vector<long long int>> routeToTripsIds;
+		unordered_map<std::string, long long int>tripToRouteIds;
+		unordered_map<std::string, gtfs::Time>tripToStartTime;
+		unordered_map<long long int, vector<std::string>> routeToTripsIds;
 		gtfs::StopTimes tempStopTimes;
 		for (gtfs::Trip& trip : trips)
 		{
-			routeToTripsIds[stoll(trip.route_id)].push_back(stoll(trip.trip_id));
-			tripToRouteIds[stoll(trip.trip_id)] = stoll(trip.route_id);
+			routeToTripsIds[stoll(trip.route_id)].push_back(trip.trip_id);
+			tripToRouteIds[trip.trip_id] = stoll(trip.route_id);
 		}
-		for (pair <const long long, vector<long long>>& i : routeToTripsIds)
+		for (pair <const long long, vector<std::string>>& i : routeToTripsIds)
 		{
 			if (freq != -1)
 			{
@@ -306,7 +307,7 @@ void Transcad::addStopTimesDepartures(gtfs::Trips& trips, unordered_map <long lo
 		tuple time = duration.get_hh_mm_ss();
 		for (gtfs::StopTime& stoptime : stoptimes)
 		{
-			stoptime.route_id = to_string(tripToRouteIds[stoll(stoptime.trip_id)]);
+			stoptime.route_id = tripToRouteIds[stoptime.trip_id];
 			stoptime.pickup_type = gtfs::StopTimeBoarding::RegularlyScheduled;
 			stoptime.drop_off_type = gtfs::StopTimeBoarding::RegularlyScheduled;
 			try
@@ -360,10 +361,10 @@ void Transcad::addStopTimesDepartures(gtfs::Trips& trips, unordered_map <long lo
 							std::cout << "\r" << "Loading: Done" << std::endl;
 					}
 					gtfs::StopTime tempStop;
-					tempStop.trip_id = to_string(routeToTripsIds[stoll(stoptime.route_id)][i]);
+					tempStop.trip_id = routeToTripsIds[stoll(stoptime.route_id)][i];
 					if (tempStop.trip_id == stoptime.trip_id)
 						continue;
-					tuple startTime = tripToStartTime[stoll(tempStop.trip_id)].get_hh_mm_ss();
+					tuple startTime = tripToStartTime[tempStop.trip_id].get_hh_mm_ss();
 					if (stoptime.stop_sequence == 1)
 					{
 						tempStop.arrival_time.setTime(int(get<0>(startTime)), int(get<1>(startTime)), int(get<2>(startTime)));
@@ -378,7 +379,7 @@ void Transcad::addStopTimesDepartures(gtfs::Trips& trips, unordered_map <long lo
 						else
 							tempTravelTime = ((((double)stoptime.shape_dist_traveled)) / 1000) / ((double)routeSpeeds[stoll(stoptime.route_id)]);
 						gtfs::Time travelTime(tempTravelTime * 60 * 60);
-						gtfs::Time currentTime = tripToStartTime[stoll(tempStop.trip_id)] + travelTime;
+						gtfs::Time currentTime = tripToStartTime[tempStop.trip_id] + travelTime;
 						tuple current = currentTime.get_hh_mm_ss();
 						tempStop.arrival_time.setTime(int(get<0>(current)), int(get<1>(current)), int(get<2>(current)));
 						tempStop.departure_time = tempStop.arrival_time;
@@ -412,10 +413,10 @@ void Transcad::addStopTimesDepartures(gtfs::Trips& trips, unordered_map <long lo
 				{
 
 					gtfs::StopTime tempStop;
-					tempStop.trip_id = to_string(routeToTripsIds[stoll(stoptime.route_id)][i]);
+					tempStop.trip_id = routeToTripsIds[stoll(stoptime.route_id)][i];
 					if (tempStop.trip_id == stoptime.trip_id)
 						continue;
-					tuple startTime = tripToStartTime[stoll(tempStop.trip_id)].get_hh_mm_ss();
+					tuple startTime = tripToStartTime[tempStop.trip_id].get_hh_mm_ss();
 					if (stoptime.stop_sequence == 1)
 					{
 						tempStop.arrival_time.setTime(int(get<0>(startTime)), int(get<1>(startTime)), int(get<2>(startTime)));
@@ -430,7 +431,7 @@ void Transcad::addStopTimesDepartures(gtfs::Trips& trips, unordered_map <long lo
 						else
 							tempTravelTime = ((((double)stoptime.shape_dist_traveled)) / 1000) / ((double)routeSpeeds[stoll(stoptime.route_id)]);
 						gtfs::Time travelTime(tempTravelTime * 60 * 60);
-						gtfs::Time currentTime = tripToStartTime[stoll(tempStop.trip_id)] + travelTime;
+						gtfs::Time currentTime = tripToStartTime[tempStop.trip_id] + travelTime;
 						tuple current = currentTime.get_hh_mm_ss();
 						tempStop.arrival_time.setTime(int(get<0>(current)), int(get<1>(current)), int(get<2>(current)));;
 						tempStop.departure_time = tempStop.arrival_time;

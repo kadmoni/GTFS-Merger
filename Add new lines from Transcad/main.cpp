@@ -326,7 +326,7 @@ void writeISR(gtfs::Feed& currentFeed, string path)
 int main()
 {
 
-// one trip too many, change tomorrow
+// one trip too many, change tomorrow, stop time problem one stop too many at the end, check the end of what is now in combined
 	unordered_map<long long int,long long int> changedRouteIds;
 	unordered_map<long long int,long long int> changedShapeIds;
 	unordered_map<string,long long int>changedTripIds;
