@@ -197,9 +197,8 @@ void Transcad::addTrips(gtfs::Trips& trips, gtfs::Time& startT, gtfs::Time& endT
 			tuple time = duration.get_hh_mm_ss();
 			int tripAmount = ((int)(get<0>(time)) + (((double)(get<1>(time))) / 60)) * freq;
 			for (gtfs::Trip& trip : trips)
-			for (gtfs::Trip& trip : trips)
 			{
-				for (int i = 0; i < tripAmount; i++)
+				for (int i = 0; i < tripAmount-1/*accounting for existing trips*/; i++)
 				{
 					tempTrips.push_back(newTrip(uniqueNum, trip));
 				}
@@ -215,7 +214,7 @@ void Transcad::addTrips(gtfs::Trips& trips, gtfs::Time& startT, gtfs::Time& endT
 			for (gtfs::Trip& trip : trips)
 			{
 				int tripAmount = ((double)(get<0>(time)) + (((double)(get<1>(time))) / 60)) * routeFreq[stoll(trip.route_id)];
-				for (int i = 0; i < tripAmount; i++)
+				for (int i = 0; i < tripAmount-1/*accounting for existing trips*/; i++)
 				{
 					tempTrips.push_back(newTrip(uniqueNum, trip));
 				}
@@ -228,9 +227,9 @@ void Transcad::addTrips(gtfs::Trips& trips, gtfs::Time& startT, gtfs::Time& endT
 	{
 		for (gtfs::Trip& trip : trips)
 		{
-			tuple time =durations[stoi(trip.route_id)].get_hh_mm_ss();
+			tuple time =durations[stoll(trip.route_id)].get_hh_mm_ss();
 			int tripAmount = ((int)(get<0>(time)) + (((double)(get<1>(time))) / 60)) * freq;
-			for (int i = 0;i < tripAmount;i++)
+			for (int i = 0;i < tripAmount-1/*acounting for existing trips*/; i++)
 			{
 				trips.push_back(newTrip(uniqueNum, trip));
 			}
@@ -307,7 +306,7 @@ void Transcad::addStopTimesDepartures(gtfs::Trips& trips, unordered_map <long lo
 		tuple time = duration.get_hh_mm_ss();
 		for (gtfs::StopTime& stoptime : stoptimes)
 		{
-			stoptime.route_id = tripToRouteIds[stoptime.trip_id];
+			stoptime.route_id = to_string(tripToRouteIds[stoptime.trip_id]);
 			stoptime.pickup_type = gtfs::StopTimeBoarding::RegularlyScheduled;
 			stoptime.drop_off_type = gtfs::StopTimeBoarding::RegularlyScheduled;
 			try
@@ -465,10 +464,11 @@ void Transcad::addStopTimesDepartures(gtfs::Trips& trips, unordered_map <long lo
 void Transcad::sortStopTimes(gtfs::StopTimes& stoptimes)
 {
 	sort(stoptimes.begin(), stoptimes.end(), stopTimesIdSort);
-	for (int i = 0; i < stoptimes.size(); i++)
+	for (int i = 0; i < stoptimes.size();)
 	{
 		int j = 0;
-		while ((stoll(stoptimes[i].trip_id) == stoll(stoptimes[i + j].trip_id))&&(i+j<stoptimes.size()-1))
+		string test = stoptimes[i].trip_id;
+		while ((i + j != stoptimes.size()) && (removeUnder(stoptimes[i].trip_id) == removeUnder(stoptimes[i + j].trip_id)))//find a way for i+j to be ok even though its outside vector scope
 			j++;
 		sort(stoptimes.begin() + i, stoptimes.begin() + i + j, stopTimesSeqSort);
 		i=i + j;
@@ -478,7 +478,7 @@ void Transcad::sortStopTimes(gtfs::StopTimes& stoptimes)
 
 bool Transcad::stopTimesIdSort(gtfs::StopTime& stop1, gtfs::StopTime& stop2)
 {
-	return stoll(stop1.trip_id) < stoll(stop2.trip_id);
+	return removeUnder(stop1.trip_id) < removeUnder(stop2.trip_id);
 }
 bool Transcad::stopTimesSeqSort(gtfs::StopTime& stop1, gtfs::StopTime& stop2)
 {
