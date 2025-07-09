@@ -21,6 +21,7 @@ enum Print
 	ZipExtract,ZipCreate,Copier
 };
 
+
 void userPrints(Print toPrint)
 {
 	switch (toPrint)
@@ -304,6 +305,7 @@ void addToFeedISR(gtfs::Routes& routes, gtfs::Stops& stops, gtfs::Trips& trips, 
 	addStopsToFeed(stops, currentFeed);
 	addTripsToFeed(trips, currentFeed);
 	addStopTimesToFeed(stoptimes, currentFeed);
+	Transcad::shapeSeqHandler(shapes);
 	addShapesToFeed(shapes, currentFeed);
 }
 
@@ -314,10 +316,16 @@ void writeISR(gtfs::Feed& currentFeed, string path)
 	userPrints(WriteTrips);
 	currentFeed.write_trips_ISR(path);
 	userPrints(WriteStops);
+	currentFeed.sortStops();
 	currentFeed.write_stops_ISR(path);
 	userPrints(WriteStopTimes);
-	currentFeed.write_stop_times_ISR(path);
+	gtfs::StopTimes allStopTimes ( currentFeed.get_stop_times());
+	Transcad::shapeDistHandler(allStopTimes);
+	gtfs::Feed stopTimesFeed;
+	addStopTimesToFeed(allStopTimes, stopTimesFeed);
+	stopTimesFeed.write_stop_times_ISR(path);
 	userPrints(WriteShapes);
+	currentFeed.sortShapes();
 	currentFeed.write_shapes_ISR(path);
 }
 
@@ -344,7 +352,7 @@ int main()
 	int speed = -1, freq = -1,tripAmount =0,update = 0,startH,startM,endH,endM;
 	gtfs::Time startT, endT;
 
-	_chdir("C://Users//User//Desktop//DEV//GTFS-merger");
+	//_chdir("C://Users//User//Desktop//DEV//GTFS-merger");
 
 	userPrints(ZipExtract);
 	system("Utillities\\zipExtractor.bat");

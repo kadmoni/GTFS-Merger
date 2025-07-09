@@ -4,3 +4,5 @@ V1:
 	  and GTFS files Extracted from Transcad.
 V1.1:
 	* Added option for updating speeds of Current GTFS files.
+V1.2:
+	*Outputs GTFS that works with Accessibility program.

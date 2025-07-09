@@ -10,3 +10,9 @@ Instructions:
 4. When the program finshes running there'll be outputs in two folder:
 	a. All proccessed GTFS files are in \Combined 
 	b. A copy of the same GTFS files are in a zipped folder in \Combined_Zip, named according to the accessbilty map's program's conventions.	
+
+NOTES:
+	1.Right now you can choose only to add lines that start and end at the same time. EVEN THOUGH YOU HAVE AN OPTION TO CHOOSE OTHERWISE,
+	choosing the option of time per line will give unexpected results or crash.
+	3.Loading is not dynamic yet. meaning that loading precentages are only an estimate based on the usual size of Israel's GTFS.
+	2.DON'T RUN ANY OTHER FILES OTHER THAN THE ONES INSTRUCTED. other files are still in beta and might not work

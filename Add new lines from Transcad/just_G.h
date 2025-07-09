@@ -1450,6 +1450,9 @@ namespace gtfs
 
         inline void updateStoptimes(int& update);
 
+        inline void sortShapes();
+        inline void sortStops();
+
 
     private:
         inline Result parse_csv(const std::string& filename,
@@ -1524,6 +1527,41 @@ namespace gtfs
         Attributions attributions;
         FeedInfo feed_info;
     };
+    inline bool ShapesIdSort(gtfs::ShapePoint& shape1, gtfs::ShapePoint& shape2)
+    {
+        return std::stoll(shape1.shape_id) < std::stoll(shape2.shape_id);
+    }
+
+    inline bool ShapesSeqSort(gtfs::ShapePoint& shape1, gtfs::ShapePoint& shape2)
+    {
+        return shape1.shape_pt_sequence < shape2.shape_pt_sequence;
+    }
+
+    inline bool StopsIdSort(gtfs::Stop& stop1, gtfs::Stop& stop2)
+    {
+        return std::stoll(stop1.stop_id) < std::stoll(stop2.stop_id);
+    }
+
+    inline void Feed::sortShapes()
+    {
+        std::sort(this->shapes.begin(), this->shapes.end(), ShapesIdSort);
+        for (int i = 0; i < this->shapes.size();)
+        {
+            int j = 0;
+            while ((i + j != shapes.size()) && (std::stoll(shapes[i].shape_id) == std::stoll(shapes[i + j].shape_id)))//find a way for i+j to be ok even though its outside vector scope
+                j++;
+            sort(shapes.begin() + i, shapes.begin() + i + j, ShapesSeqSort);
+            i = i + j;
+
+        }
+    }
+
+    inline void Feed::sortStops()
+    {
+        std::sort(this->stops.begin(), this->stops.end(), StopsIdSort);
+    }
+
+
     inline void Feed::updateStoptimes(int& update)
     {
         if (update != -1)
@@ -1863,11 +1901,16 @@ namespace gtfs
             // Optional:
             set_field(stop_time.pickup_type, row, "pickup_type");
             set_field(stop_time.drop_off_type, row, "drop_off_type");
-
-            set_fractional(stop_time.shape_dist_traveled, row, "shape_dist_traveled");
-            if (stop_time.shape_dist_traveled < 0.0)
-                throw std::invalid_argument("Invalid shape_dist_traveled");
-
+            if (row.at("shape_dist_traveled") != "")
+            {
+                set_fractional(stop_time.shape_dist_traveled, row, "shape_dist_traveled");
+                if (stop_time.shape_dist_traveled < 0.0)
+                    throw std::invalid_argument("Invalid shape_dist_traveled");
+            }
+            else
+            {
+                int check = 1;
+            }
             set_field(stop_time.timepoint, row, "timepoint");
         }
         catch (const std::out_of_range& ex)
@@ -3163,16 +3206,32 @@ namespace gtfs
 
                 std::cout << "Loading: " << perc++ << "%" << "\r";
             }
-            std::vector<std::string> fields{ wrap(stop_time.trip_id),
-                                            stop_time.arrival_time.get_raw_time(),
-                                            stop_time.departure_time.get_raw_time(),
-                                            wrap(stop_time.stop_id),
-                                            wrap(stop_time.stop_sequence),
-                                            wrap(stop_time.pickup_type),
-                                            wrap(stop_time.drop_off_type),
-                                            wrap((int)stop_time.shape_dist_traveled) };
-            // TODO: handle new stop_times fields.
-            write_joined(out, std::move(fields));
+
+            if (stop_time.shape_dist_traveled == -1)
+            {
+                std::vector<std::string> fields{ wrap(stop_time.trip_id),
+                                stop_time.arrival_time.get_raw_time(),
+                                stop_time.departure_time.get_raw_time(),
+                                wrap(stop_time.stop_id),
+                                wrap(stop_time.stop_sequence),
+                                wrap(stop_time.pickup_type),
+                                wrap(stop_time.drop_off_type),
+                                ""/*for accessibility software*/};
+                write_joined(out, std::move(fields));
+            }
+            else
+            {
+                std::vector<std::string> fields{ wrap(stop_time.trip_id),
+                                stop_time.arrival_time.get_raw_time(),
+                                stop_time.departure_time.get_raw_time(),
+                                wrap(stop_time.stop_id),
+                                wrap(stop_time.stop_sequence),
+                                wrap(stop_time.pickup_type),
+                                wrap(stop_time.drop_off_type),
+                                wrap((int)stop_time.shape_dist_traveled) };
+                write_joined(out, std::move(fields));
+
+            }
         }
     }
 

@@ -26,9 +26,13 @@ void Transcad::addInfoRoutes(gtfs::Routes& routes)
 {
 	for (gtfs::Route& route : routes)
 	{
-		route.agency_id = "76";
+		route.agency_id = "18";
 		route.route_long_name = route.route_short_name;
-		route.route_desc = route.route_short_name;
+		route.route_desc = route.route_short_name+" desc";
+		if (route.route_short_name.length() > 8)
+			route.route_short_name = route.route_short_name.substr(0,7)+"S";
+		else
+			route.route_short_name = route.route_short_name + "S";
 		route.route_type = gtfs::RouteType::Bus;
 	}
 }
@@ -47,7 +51,7 @@ void Transcad::addInfoStops(gtfs::Stops& stops)
 	for (gtfs::Stop& stop : stops)
 	{
 		stop.stop_code = stop.stop_id;
-		stop.stop_desc = stop.stop_name;
+		stop.stop_desc = stop.stop_name+" desc";
 		stop.zone_id = stop.stop_id;
 	}
 }
@@ -467,7 +471,6 @@ void Transcad::sortStopTimes(gtfs::StopTimes& stoptimes)
 	for (int i = 0; i < stoptimes.size();)
 	{
 		int j = 0;
-		string test = stoptimes[i].trip_id;
 		while ((i + j != stoptimes.size()) && (removeUnder(stoptimes[i].trip_id) == removeUnder(stoptimes[i + j].trip_id)))//find a way for i+j to be ok even though its outside vector scope
 			j++;
 		sort(stoptimes.begin() + i, stoptimes.begin() + i + j, stopTimesSeqSort);
@@ -508,6 +511,34 @@ string Transcad::getStartDate(gtfs::Calendar& calendar)
 	string day = calendar[0].start_date.getDD();
 	string fullDate = year + month+day;
 	return fullDate;
+}
+
+void Transcad::shapeDistHandler(gtfs::StopTimes& stoptimes)//for accessibility software - shape_dist_traveled cant be 0 followed by 0
+{
+	int size = stoptimes.size();
+	for (int i = 0; i < size; i++)
+	{
+		if (i < size - 1)
+		{
+			if ((stoptimes[i].shape_dist_traveled == 0.0) && (stoptimes[i + 1].shape_dist_traveled == stoptimes[i].shape_dist_traveled))
+			{
+				stoptimes[i].shape_dist_traveled = -1;
+			}
+		}
+		else
+		{
+			if (stoptimes[i].shape_dist_traveled == 0.0)
+				stoptimes[i].shape_dist_traveled = -1;
+		}
+	}
+}
+
+void Transcad::shapeSeqHandler(gtfs::Shape& shapes)
+{
+	for (gtfs::ShapePoint& shape : shapes)
+	{
+		shape.shape_pt_sequence = shape.shape_pt_sequence + 1;
+	}
 }
 
 

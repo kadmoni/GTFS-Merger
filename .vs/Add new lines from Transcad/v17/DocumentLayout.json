@@ -5,18 +5,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{BBEA2A10-3FF3-45E4-B179-7A76155CA17E}|Add new lines from Transcad\\Add new lines from Transcad.vcxproj|C:\\Users\\User\\Desktop\\DEV\\GTFS-merger\\Add new lines from Transcad\\just_G.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{BBEA2A10-3FF3-45E4-B179-7A76155CA17E}|Add new lines from Transcad\\Add new lines from Transcad.vcxproj|solutionrelative:Add new lines from Transcad\\just_G.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BBEA2A10-3FF3-45E4-B179-7A76155CA17E}|Add new lines from Transcad\\Add new lines from Transcad.vcxproj|C:\\Users\\User\\Desktop\\DEV\\GTFS-merger\\Add new lines from Transcad\\Transcad.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{BBEA2A10-3FF3-45E4-B179-7A76155CA17E}|Add new lines from Transcad\\Add new lines from Transcad.vcxproj|solutionrelative:Add new lines from Transcad\\Transcad.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BBEA2A10-3FF3-45E4-B179-7A76155CA17E}|Add new lines from Transcad\\Add new lines from Transcad.vcxproj|C:\\Users\\User\\Desktop\\DEV\\GTFS-merger\\Add new lines from Transcad\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{BBEA2A10-3FF3-45E4-B179-7A76155CA17E}|Add new lines from Transcad\\Add new lines from Transcad.vcxproj|solutionrelative:Add new lines from Transcad\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BBEA2A10-3FF3-45E4-B179-7A76155CA17E}|Add new lines from Transcad\\Add new lines from Transcad.vcxproj|C:\\Users\\User\\Desktop\\DEV\\GTFS-merger\\Add new lines from Transcad\\Transcad.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{BBEA2A10-3FF3-45E4-B179-7A76155CA17E}|Add new lines from Transcad\\Add new lines from Transcad.vcxproj|solutionrelative:Add new lines from Transcad\\Transcad.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,47 +14,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Transcad.h",
-              "DocumentMoniker": "C:\\Users\\User\\Desktop\\DEV\\GTFS-merger\\Add new lines from Transcad\\Transcad.h",
-              "RelativeDocumentMoniker": "Add new lines from Transcad\\Transcad.h",
-              "ToolTip": "C:\\Users\\User\\Desktop\\DEV\\GTFS-merger\\Add new lines from Transcad\\Transcad.h",
-              "RelativeToolTip": "Add new lines from Transcad\\Transcad.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAABwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-07-06T06:41:42.291Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "main.cpp",
-              "DocumentMoniker": "C:\\Users\\User\\Desktop\\DEV\\GTFS-merger\\Add new lines from Transcad\\main.cpp",
-              "RelativeDocumentMoniker": "Add new lines from Transcad\\main.cpp",
-              "ToolTip": "C:\\Users\\User\\Desktop\\DEV\\GTFS-merger\\Add new lines from Transcad\\main.cpp",
-              "RelativeToolTip": "Add new lines from Transcad\\main.cpp",
-              "ViewState": "AgIAADkBAAAAAAAAAAApwEYBAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-07-02T00:31:14.444Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Transcad.cpp",
-              "DocumentMoniker": "C:\\Users\\User\\Desktop\\DEV\\GTFS-merger\\Add new lines from Transcad\\Transcad.cpp",
-              "RelativeDocumentMoniker": "Add new lines from Transcad\\Transcad.cpp",
-              "ToolTip": "C:\\Users\\User\\Desktop\\DEV\\GTFS-merger\\Add new lines from Transcad\\Transcad.cpp",
-              "RelativeToolTip": "Add new lines from Transcad\\Transcad.cpp",
-              "ViewState": "AgIAAMsBAAAAAAAAAAAcwOkBAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-07-02T00:21:47.806Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -75,7 +24,7 @@
               "RelativeDocumentMoniker": "Add new lines from Transcad\\just_G.h",
               "ToolTip": "C:\\Users\\User\\Desktop\\DEV\\GTFS-merger\\Add new lines from Transcad\\just_G.h",
               "RelativeToolTip": "Add new lines from Transcad\\just_G.h",
-              "ViewState": "AgIAAGkAAAAAAAAAAAAwwHMAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAPoFAAAAAAAAAAAwwBgGAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-07-01T15:27:45.763Z",
               "EditorCaption": ""

@@ -21,7 +21,8 @@ public :
 	static bool stopTimesSeqSort(gtfs::StopTime& stop1, gtfs::StopTime& stop2);
 	static void matchShapeId(gtfs::Shapes& shapes, unordered_map<long long int, long long int>& changedShapeIds);
 	static string getStartDate(gtfs::Calendar& calendar);
-
+	static void shapeDistHandler(gtfs::StopTimes& stopTimes);
+	static void shapeSeqHandler(gtfs::Shape& shapes);
 
 
 
