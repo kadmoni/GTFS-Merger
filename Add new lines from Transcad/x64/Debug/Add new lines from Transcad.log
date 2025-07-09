@@ -1,30 +1,48 @@
-﻿  main.cpp
+﻿  Transcad.cpp
 C:\Users\User\Desktop\DEV\GTFS-merger\Add new lines from Transcad\just_G.h(655,11): warning C4267: 'initializing': conversion from 'size_t' to 'uint16_t', possible loss of data
-  (compiling source file 'main.cpp')
+  (compiling source file 'Transcad.cpp')
   
 C:\Users\User\Desktop\DEV\GTFS-merger\Add new lines from Transcad\just_G.h(1573,22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  (compiling source file 'main.cpp')
+  (compiling source file 'Transcad.cpp')
   
 C:\Users\User\Desktop\DEV\GTFS-merger\Add new lines from Transcad\just_G.h(1581,157): warning C4244: 'argument': conversion from 'double' to 'size_t', possible loss of data
-  (compiling source file 'main.cpp')
+  (compiling source file 'Transcad.cpp')
   
 C:\Users\User\Desktop\DEV\GTFS-merger\Add new lines from Transcad\just_G.h(3023,18): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  (compiling source file 'main.cpp')
+  (compiling source file 'Transcad.cpp')
   
 C:\Users\User\Desktop\DEV\GTFS-merger\Add new lines from Transcad\just_G.h(3065,18): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  (compiling source file 'main.cpp')
+  (compiling source file 'Transcad.cpp')
   
 C:\Users\User\Desktop\DEV\GTFS-merger\Add new lines from Transcad\just_G.h(3104,18): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  (compiling source file 'main.cpp')
+  (compiling source file 'Transcad.cpp')
   
 C:\Users\User\Desktop\DEV\GTFS-merger\Add new lines from Transcad\just_G.h(3144,18): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  (compiling source file 'main.cpp')
+  (compiling source file 'Transcad.cpp')
   
 C:\Users\User\Desktop\DEV\GTFS-merger\Add new lines from Transcad\just_G.h(3195,18): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  (compiling source file 'main.cpp')
+  (compiling source file 'Transcad.cpp')
   
-C:\Users\User\Desktop\DEV\GTFS-merger\Add new lines from Transcad\main.cpp(352,72): warning C4101: 'endM': unreferenced local variable
-C:\Users\User\Desktop\DEV\GTFS-merger\Add new lines from Transcad\main.cpp(352,53): warning C4101: 'startH': unreferenced local variable
-C:\Users\User\Desktop\DEV\GTFS-merger\Add new lines from Transcad\main.cpp(352,67): warning C4101: 'endH': unreferenced local variable
-C:\Users\User\Desktop\DEV\GTFS-merger\Add new lines from Transcad\main.cpp(352,60): warning C4101: 'startM': unreferenced local variable
+C:\Users\User\Desktop\DEV\GTFS-merger\Add new lines from Transcad\Transcad.cpp(176,35): warning C4101: 'oor': unreferenced local variable
+C:\Users\User\Desktop\DEV\GTFS-merger\Add new lines from Transcad\Transcad.cpp(202,19): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\User\Desktop\DEV\GTFS-merger\Add new lines from Transcad\Transcad.cpp(220,20): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\User\Desktop\DEV\GTFS-merger\Add new lines from Transcad\Transcad.cpp(235,19): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\User\Desktop\DEV\GTFS-merger\Add new lines from Transcad\Transcad.cpp(252,40): warning C4244: 'argument': conversion from '__int64' to 'const _Elem', possible loss of data
+C:\Users\User\Desktop\DEV\GTFS-merger\Add new lines from Transcad\Transcad.cpp(252,40): warning C4244:         with
+C:\Users\User\Desktop\DEV\GTFS-merger\Add new lines from Transcad\Transcad.cpp(252,40): warning C4244:         [
+C:\Users\User\Desktop\DEV\GTFS-merger\Add new lines from Transcad\Transcad.cpp(252,40): warning C4244:             _Elem=char
+C:\Users\User\Desktop\DEV\GTFS-merger\Add new lines from Transcad\Transcad.cpp(252,40): warning C4244:         ]
+C:\Users\User\Desktop\DEV\GTFS-merger\Add new lines from Transcad\Transcad.cpp(254,35): warning C4101: 'oor': unreferenced local variable
+C:\Users\User\Desktop\DEV\GTFS-merger\Add new lines from Transcad\Transcad.cpp(263,35): warning C4101: 'oor': unreferenced local variable
+C:\Users\User\Desktop\DEV\GTFS-merger\Add new lines from Transcad\Transcad.cpp(340,47): warning C4244: 'argument': conversion from 'double' to 'size_t', possible loss of data
+C:\Users\User\Desktop\DEV\GTFS-merger\Add new lines from Transcad\Transcad.cpp(352,19): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\User\Desktop\DEV\GTFS-merger\Add new lines from Transcad\Transcad.cpp(384,49): warning C4244: 'argument': conversion from 'double' to 'size_t', possible loss of data
+C:\Users\User\Desktop\DEV\GTFS-merger\Add new lines from Transcad\Transcad.cpp(414,20): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\User\Desktop\DEV\GTFS-merger\Add new lines from Transcad\Transcad.cpp(436,49): warning C4244: 'argument': conversion from 'double' to 'size_t', possible loss of data
+C:\Users\User\Desktop\DEV\GTFS-merger\Add new lines from Transcad\Transcad.cpp(321,36): warning C4101: 'oor': unreferenced local variable
+C:\Users\User\Desktop\DEV\GTFS-merger\Add new lines from Transcad\Transcad.cpp(397,38): warning C4101: 'oor': unreferenced local variable
+C:\Users\User\Desktop\DEV\GTFS-merger\Add new lines from Transcad\Transcad.cpp(449,38): warning C4101: 'oor': unreferenced local variable
+C:\Users\User\Desktop\DEV\GTFS-merger\Add new lines from Transcad\Transcad.cpp(499,35): warning C4101: 'oor': unreferenced local variable
+C:\Users\User\Desktop\DEV\GTFS-merger\Add new lines from Transcad\Transcad.cpp(518,11): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  LINK : C:\Users\User\Desktop\DEV\GTFS-merger\x64\Debug\Add new lines from Transcad.exe not found or not built by the last incremental link; performing full link
   Add new lines from Transcad.vcxproj -> C:\Users\User\Desktop\DEV\GTFS-merger\x64\Debug\Add new lines from Transcad.exe

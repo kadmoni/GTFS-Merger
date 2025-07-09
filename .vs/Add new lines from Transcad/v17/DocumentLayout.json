@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\User\\Desktop\\DEV\\GTFS-merger\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{BBEA2A10-3FF3-45E4-B179-7A76155CA17E}|Add new lines from Transcad\\Add new lines from Transcad.vcxproj|C:\\Users\\User\\Desktop\\DEV\\GTFS-merger\\Add new lines from Transcad\\Transcad.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{BBEA2A10-3FF3-45E4-B179-7A76155CA17E}|Add new lines from Transcad\\Add new lines from Transcad.vcxproj|solutionrelative:Add new lines from Transcad\\Transcad.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{BBEA2A10-3FF3-45E4-B179-7A76155CA17E}|Add new lines from Transcad\\Add new lines from Transcad.vcxproj|C:\\Users\\User\\Desktop\\DEV\\GTFS-merger\\Add new lines from Transcad\\just_G.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{BBEA2A10-3FF3-45E4-B179-7A76155CA17E}|Add new lines from Transcad\\Add new lines from Transcad.vcxproj|solutionrelative:Add new lines from Transcad\\just_G.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
@@ -19,6 +23,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Transcad.cpp",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\DEV\\GTFS-merger\\Add new lines from Transcad\\Transcad.cpp",
+              "RelativeDocumentMoniker": "Add new lines from Transcad\\Transcad.cpp",
+              "ToolTip": "C:\\Users\\User\\Desktop\\DEV\\GTFS-merger\\Add new lines from Transcad\\Transcad.cpp",
+              "RelativeToolTip": "Add new lines from Transcad\\Transcad.cpp",
+              "ViewState": "AgIAAOAAAAAAAAAAAAAwwP8AAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-07-09T11:27:47.15Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "just_G.h",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\DEV\\GTFS-merger\\Add new lines from Transcad\\just_G.h",
               "RelativeDocumentMoniker": "Add new lines from Transcad\\just_G.h",

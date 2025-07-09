@@ -253,7 +253,7 @@ void Transcad::updateStopTimeIds(gtfs::StopTimes& stoptimes, unordered_map<std::
 		}
 		catch (const std::out_of_range& oor)
 		{
-			stoptime.stop_id = tempTrip;
+			stoptime.trip_id = tempTrip;
 		}
 		string tempStop = stoptime.stop_id;
 		try
