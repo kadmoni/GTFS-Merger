@@ -312,7 +312,7 @@ void addToFeedISR(gtfs::Routes& routes, gtfs::Stops& stops, gtfs::Trips& trips, 
 void writeISR(gtfs::Feed& currentFeed, string path)
 {
 	userPrints(WriteRoutes);
-	currentFeed.write_routes_ISR(path);
+	currentFeed.write_routes_ISR(path);//writing all route types as 3 because of accessibility software limitations for now
 	userPrints(WriteTrips);
 	currentFeed.write_trips_ISR(path);
 	userPrints(WriteStops);

@@ -1567,9 +1567,9 @@ namespace gtfs
     {
         if (update != -1)
         {
-            unordered_map<long long int, int> routesToAg;
-            for (gtfs::Route& route : this->routes)
-                routesToAg[stoll(route.route_id)] = stoi(route.agency_id);
+            std::unordered_map<long long int, int> routesToAg;
+            //for (gtfs::Route& route : this->routes)
+              //  routesToAg[stoll(route.route_id)] = stoi(route.agency_id);
             std::cout << "Updating stop times acordding to given % change: " << std::endl;
             double adjust = 0;// new line is "adjust" times faster than old line
             adjust = 1 + ((double)update / 100);
@@ -1580,7 +1580,7 @@ namespace gtfs
             for (int i = 0; i < size; i++)
             {
                 loading(countIMirror, countPerc, size, check);
-                if ((this->stop_times[i].stop_sequence != 1)&&(routesToAg[stoll(stop_times[i].route_id)]!=ISRAEL_RAIL))
+                if (this->stop_times[i].stop_sequence != 1)//&&(routesToAg[stoll(stop_times[i].route_id)]!=ISRAEL_RAIL))
                 {
                     gtfs::Time timeChange((this->stop_times[i].arrival_time.get_total_seconds() - this->stop_times[i - 1].arrival_time.get_total_seconds()) * (1 / adjust));
                     this->stop_times[i].arrival_time = this->stop_times[i - 1].arrival_time + timeChange;
@@ -3043,7 +3043,7 @@ namespace gtfs
                                             wrap(route.route_short_name),
                                             wrap(route.route_long_name),
                                             wrap(route.route_desc),
-                                            wrap(route.route_type),
+                                            wrap(gtfs::RouteType::Bus),//writing all routes types as 3 (bus) because of accessibiliyt software limitations for now
                                             route.route_color};
             // TODO: handle new route fields.
             write_joined(out, std::move(fields));
